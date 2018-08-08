@@ -21,7 +21,7 @@
 */
 
 var $Library = (function ($Mixin, $Book) {
-    //Private variables stored in lexical scope using closures
+    //Using closure to keep private
     let libraryBooks = new Set()
     //Assign mixin functionality to $Library module
     let module = Object.assign({}, $Mixin);

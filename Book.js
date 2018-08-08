@@ -10,7 +10,7 @@
 */
 
 var $Book = (function () {
-    //Private variables stored in lexical scope using closures
+    //Using closure to keep private
     let books = new Set();
 
     /********************
