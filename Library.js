@@ -91,7 +91,7 @@ var $Library = (function ($Mixin, $Book) {
          ********************/
         /**
          * Creates a library book
-         * @param book - Book that library book is linked to.
+         * @param {$Book.Book} book - Book that library book is linked to.
          */
         createLibraryBook(book) {
             var obj = new LibraryBook();
