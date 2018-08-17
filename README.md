@@ -4,4 +4,4 @@ Javascript modules that can be used to create an application for a mock public l
 
 The modules still require unit tests, however it is a strong foundation for a potential library app.
 
-I would also like to create a UI using react, which should integrate nicely with the modules and classes already established.
+React prototype in library-app. Just getting the my feet wet with React, great learning experience.
