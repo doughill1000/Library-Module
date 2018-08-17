@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders library book 1`] = `
+Array [
+  <div
+    className="row"
+>
+    <div
+        className=" col-8 col-sm-6 col-md-3 col-lg-1"
+    >
+        <img
+            alt="Book Cover"
+            src={undefined}
+        />
+    </div>
+    <div
+        className="col-12 col-md-8"
+    >
+        <div>
+            Title: 
+            the book
+             
+        </div>
+        <div>
+            By: 
+            author
+        </div>
+    </div>
+    <div
+        className="m-2 col-sm-12"
+    >
+        <a
+            href="javascript:void(0)"
+            onClick={[Function]}
+        >
+            Paper
+             Copies: 
+            0
+             
+        </a>
+        <button
+            className="btn btn-success"
+            onClick={[Function]}
+        >
+            Add Copy
+        </button>
+        <button
+            className="btn btn-primary"
+            onClick={[Function]}
+        >
+            Checkout Copy
+        </button>
+    </div>
+    <div
+        style={
+            Object {
+                "display": "inline-block",
+              }
+        }
+    >
+        <ul />
+    </div>
+    <div
+        className="m-2 col-sm-12"
+    >
+        <a
+            href="javascript:void(0)"
+            onClick={[Function]}
+        >
+            Audio
+             Copies: 
+            0
+             
+        </a>
+        <button
+            className="btn btn-success"
+            onClick={[Function]}
+        >
+            Add Copy
+        </button>
+        <button
+            className="btn btn-primary"
+            onClick={[Function]}
+        >
+            Checkout Copy
+        </button>
+    </div>
+    <div
+        style={
+            Object {
+                "display": "inline-block",
+              }
+        }
+    >
+        <ul />
+    </div>
+</div>,
+  <br />,
+]
+`;

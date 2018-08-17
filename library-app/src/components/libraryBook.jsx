@@ -26,7 +26,6 @@ class LibraryBook extends Component {
             addCopy={this.addCopy}
             handleCheckoutCopy={this.handleCheckoutCopy}
           />
-
           <LibraryBookCopies
             name={"Audio"}
             copies={this.state.audioCopies}
