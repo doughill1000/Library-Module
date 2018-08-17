@@ -1,6 +1,10 @@
 import React from "react";
 import "../styles/book.css";
 
+/**Books component
+ *
+ * Displays information about a book
+ */
 const Book = props => {
   const { imageUrl, title, author } = props.book;
   return (

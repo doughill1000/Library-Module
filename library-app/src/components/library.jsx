@@ -2,9 +2,18 @@ import React, { Component } from "react";
 import LibraryBook from "./libraryBook";
 import "../styles/library.css";
 
+/**
+ * Incremented values for both books and book copies.
+ * Kept at this level to ensure they are unique as copies and books are created
+ */
 let libraryBookId = 0;
 let libraryBookCopySerialNum = 0;
 
+/**
+ * Library for library items
+ *
+ * Displays a list of library items
+ */
 class Library extends Component {
   constructor(props) {
     super(props);
@@ -33,11 +42,17 @@ class Library extends Component {
     );
   }
 
+  /**
+   * Generates an new book id.
+   */
   generateNewLibraryBookId() {
     libraryBookId = libraryBookId + 1;
     return libraryBookId;
   }
 
+  /**
+   * Generates a new book serial number
+   */
   generateNewLibraryBookCopySerialNum() {
     libraryBookCopySerialNum = libraryBookCopySerialNum + 1;
     return libraryBookCopySerialNum;

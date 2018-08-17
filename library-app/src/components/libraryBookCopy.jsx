@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 
+/**
+ * LibraryBookCopy Component
+ * 
+ * Displays information about the library book copy.
+ */
 class LibraryBookCopy extends Component {
   render() {
     const { serialNum, isAvailable } = this.props.copy;

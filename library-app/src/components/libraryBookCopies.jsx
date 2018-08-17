@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import LibraryBookCopy from "./libraryBookCopy";
 
+/**
+ * LibraryBooksCopies Component
+ *
+ * Displays a list of library book copies
+ */
 class LibraryBookCopies extends Component {
   state = {
     displayCopies: true
@@ -49,6 +54,9 @@ class LibraryBookCopies extends Component {
     );
   }
 
+  /**
+   * Toggles whether to display the copies list
+   */
   toggleDisplayCopies = () => {
     this.setState({ displayCopies: !this.state.displayCopies });
   };
