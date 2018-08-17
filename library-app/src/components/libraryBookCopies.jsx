@@ -6,6 +6,7 @@ class LibraryBookCopies extends Component {
     displayCopies: true
   };
   render() {
+    const { name, copies, copyType } = this.props;
     return (
       <React.Fragment>
         <div className={"m-2 col-sm-12"}>
@@ -13,17 +14,17 @@ class LibraryBookCopies extends Component {
             href={"javascript:void(0)"}
             onClick={() => this.toggleDisplayCopies()}
           >
-            {this.props.name} Copies: {this.props.numCopies}{" "}
+            {name} Copies: {copies.length}{" "}
           </a>
           <button
-            className={"btn btn-success"}
-            onClick={() => this.props.handleAddCopy(this.props.copyType)}
+            className={"btn btn-success m-1"}
+            onClick={() => this.props.handleAddCopy(copyType)}
           >
             Add Copy
           </button>
           <button
-            className={"btn btn-primary"}
-            onClick={() => this.props.handleCheckoutCopy(this.props.copyType)}
+            className={"btn btn-primary m-1"}
+            onClick={() => this.props.handleCheckoutCopy(copyType)}
           >
             Checkout Copy
           </button>
@@ -34,8 +35,8 @@ class LibraryBookCopies extends Component {
           }}
         >
           <ul>
-            {this.props.copies.map((copy, i) => (
-              <li key={i} className={"row"}>
+            {copies.map((copy, i) => (
+              <li key={i} className={""}>
                 <LibraryBookCopy
                   copy={{ ...copy }}
                   handleReturnCopy={this.props.handleReturnCopy}

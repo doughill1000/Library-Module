@@ -13,8 +13,7 @@ const libraryBooks = [{
             imageUrl: "https://upload.wikimedia.org/wikipedia/en/4/4b/Crimeandpunishmentcover.png"
 
         },
-        paperCopies: [],
-        audioCopies: []
+        copies: []
     },
     {
         id: 0,
@@ -24,8 +23,7 @@ const libraryBooks = [{
             imageUrl: "https://upload.wikimedia.org/wikipedia/en/5/56/EastOfEden.jpg"
 
         },
-        paperCopies: [],
-        audioCopies: []
+        copies: []
     }
 ]
 

@@ -6,22 +6,23 @@ class LibraryBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      paperCopies: props.libraryBook.paperCopies,
-      audioCopies: props.libraryBook.audioCopies,
-      totalCopies: 0
+      copies: props.libraryBook.copies
     };
   }
 
   render() {
     const { book } = this.props.libraryBook;
+    const { copies } = this.state;
     return (
       <React.Fragment>
         <div className={"row"}>
           <Book book={book} />
+          <div className={"col-12 m-2"}>
+            Total Number of Copies: {copies.length}
+          </div>
           <LibraryBookCopies
             name={"Paper"}
-            copies={this.state.paperCopies}
-            numCopies={this.state.paperCopies.length}
+            copies={this.getCopiesOfType(CopyTypes.PAPER)}
             copyType={CopyTypes.PAPER}
             handleAddCopy={this.handleAddCopy}
             handleCheckoutCopy={this.handleCheckoutCopy}
@@ -29,8 +30,7 @@ class LibraryBook extends Component {
           />
           <LibraryBookCopies
             name={"Audio"}
-            copies={this.state.audioCopies}
-            numCopies={this.state.audioCopies.length}
+            copies={this.getCopiesOfType(CopyTypes.AUDIO)}
             copyType={CopyTypes.AUDIO}
             handleAddCopy={this.handleAddCopy}
             handleCheckoutCopy={this.handleCheckoutCopy}
@@ -42,19 +42,18 @@ class LibraryBook extends Component {
     );
   }
 
-  getAllCopies = () => {
-    const { paperCopies, audioCopies } = this.state;
-    return paperCopies.concat(audioCopies); //.concat(...otherCopyTypes)
+  getCopiesOfType = copyType => {
+    return this.state.copies.filter(copy => copy.type === copyType);
   };
 
-  handleAddCopy = value => {
+  handleAddCopy = copyType => {
     const serialNum = this.props.generateNewLibraryBookCopySerialNum();
     let copy = {
       serialNum,
       isAvailable: true
     };
 
-    switch (value) {
+    switch (copyType) {
       case CopyTypes.PAPER: {
         this.addPaperBookCopy(copy);
         break;
@@ -66,7 +65,6 @@ class LibraryBook extends Component {
       default:
         throw "Copy must have a valid type";
     }
-    this.setState(prevState => ({ totalCopies: prevState.totalCopies++ }));
   };
 
   /**
@@ -74,9 +72,13 @@ class LibraryBook extends Component {
    * @param {Object} copy - The copy being added
    */
   addPaperBookCopy = copy => {
-    let paperCopy = Object.assign(copy, { numPages: 100 });
+    let paperCopy = Object.assign(copy, {
+      numPages: 100,
+      type: CopyTypes.PAPER
+    });
+
     this.setState({
-      paperCopies: [...this.state.paperCopies, paperCopy]
+      copies: this.getDeepCloneCopies().concat([paperCopy])
     });
   };
 
@@ -85,32 +87,22 @@ class LibraryBook extends Component {
    * @param {Object} copy - The copy being added
    */
   addAudioBookCopy = copy => {
-    let audioCopy = Object.assign(copy, { recordingLength: 100 });
-    this.setState({ audioCopies: [...this.state.audioCopies, audioCopy] });
+    let audioCopy = Object.assign(copy, {
+      recordingLength: 100,
+      type: CopyTypes.AUDIO
+    });
+
+    this.setState({
+      copies: this.getDeepCloneCopies().concat([audioCopy])
+    });
   };
 
   handleCheckoutCopy = type => {
-    let updatedCopies = [];
-    switch (type) {
-      case CopyTypes.PAPER: {
-        updatedCopies = this.checkoutCopy(this.state.paperCopies, type);
-        this.setState({ paperCopies: updatedCopies });
-        break;
-      }
-      case CopyTypes.AUDIO: {
-        updatedCopies = this.checkoutCopy(this.state.audioCopies, type);
-        this.setState({ audioCopies: updatedCopies });
-        break;
-      }
-      default: {
-        throw "Please enter a valid type of item to check out";
-      }
-    }
-  };
+    let updatedCopies = this.getDeepCloneCopies();
 
-  checkoutCopy = (copies, type) => {
-    let updatedCopies = [...copies];
-    const index = copies.findIndex(copy => copy.isAvailable === true);
+    const index = this.state.copies.findIndex(
+      copy => copy.type === type && copy.isAvailable === true
+    );
 
     if (index !== -1) {
       updatedCopies[index].isAvailable = false;
@@ -118,18 +110,20 @@ class LibraryBook extends Component {
       alert("There are no more " + type + " copies to be checked out");
     }
 
-    return updatedCopies;
+    this.setState({ copies: updatedCopies });
   };
+
+  getDeepCloneCopies() {
+    return JSON.parse(JSON.stringify(this.state.copies));
+  }
 
   //Needs refactor
   handleReturnCopy = serialNum => {
-    let returnCopy = {
-      ...this.getAllCopies().find(elem => elem.serialNum === serialNum)
-    };
+    let updatedCopies = this.getDeepCloneCopies();
 
-    returnCopy.isAvailable = true;
+    updatedCopies.find(copy => copy.serialNum === serialNum).isAvailable = true;
 
-    this.forceUpdate();
+    this.setState({ copies: updatedCopies });
   };
 }
 
