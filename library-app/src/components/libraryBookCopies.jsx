@@ -17,7 +17,7 @@ class LibraryBookCopies extends Component {
           </a>
           <button
             className={"btn btn-success"}
-            onClick={() => this.props.addCopy(this.props.copyType)}
+            onClick={() => this.props.handleAddCopy(this.props.copyType)}
           >
             Add Copy
           </button>
@@ -35,8 +35,11 @@ class LibraryBookCopies extends Component {
         >
           <ul>
             {this.props.copies.map((copy, i) => (
-              <li key={i}>
-                <LibraryBookCopy copy={{ ...copy }} />
+              <li key={i} className={"row"}>
+                <LibraryBookCopy
+                  copy={{ ...copy }}
+                  handleReturnCopy={this.props.handleReturnCopy}
+                />
               </li>
             ))}
           </ul>

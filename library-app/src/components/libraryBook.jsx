@@ -23,16 +23,18 @@ class LibraryBook extends Component {
             copies={this.state.paperCopies}
             numCopies={this.state.paperCopies.length}
             copyType={CopyTypes.PAPER}
-            addCopy={this.addCopy}
+            handleAddCopy={this.handleAddCopy}
             handleCheckoutCopy={this.handleCheckoutCopy}
+            handleReturnCopy={this.handleReturnCopy}
           />
           <LibraryBookCopies
             name={"Audio"}
             copies={this.state.audioCopies}
             numCopies={this.state.audioCopies.length}
             copyType={CopyTypes.AUDIO}
-            addCopy={this.addCopy}
+            handleAddCopy={this.handleAddCopy}
             handleCheckoutCopy={this.handleCheckoutCopy}
+            handleReturnCopy={this.handleReturnCopy}
           />
         </div>
         <br />
@@ -40,7 +42,12 @@ class LibraryBook extends Component {
     );
   }
 
-  addCopy = value => {
+  getAllCopies = () => {
+    const { paperCopies, audioCopies } = this.state;
+    return paperCopies.concat(audioCopies); //.concat(...otherCopyTypes)
+  };
+
+  handleAddCopy = value => {
     const serialNum = this.props.generateNewLibraryBookCopySerialNum();
     let copy = {
       serialNum,
@@ -112,6 +119,17 @@ class LibraryBook extends Component {
     }
 
     return updatedCopies;
+  };
+
+  //Needs refactor
+  handleReturnCopy = serialNum => {
+    let returnCopy = {
+      ...this.getAllCopies().find(elem => elem.serialNum === serialNum)
+    };
+
+    returnCopy.isAvailable = true;
+
+    this.forceUpdate();
   };
 }
 
