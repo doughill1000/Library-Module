@@ -7,7 +7,7 @@ class LibraryBookCopy extends Component {
     if (!isAvailable) {
       btnReturn = (
         <button
-          className={"btn btn-warning btn-sm"}
+          className={"btn btn-warning btn-sm ml-2"}
           onClick={() => this.props.handleReturnCopy(serialNum)}
         >
           Return
@@ -15,13 +15,13 @@ class LibraryBookCopy extends Component {
       );
     }
     return (
-      <div className={"m-2"}>
+      <div className={"m-1"}>
         <span> Serial # {serialNum}</span>{" "}
         <span className={isAvailable ? "text-success" : "text-danger"}>
           {" "}
           {isAvailable ? "Available" : "Checked Out"}
         </span>{" "}
-        <span>{btnReturn}</span>
+        {btnReturn}
       </div>
     );
   }
